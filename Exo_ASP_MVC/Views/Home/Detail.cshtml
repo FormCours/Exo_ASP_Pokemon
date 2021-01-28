@@ -1,0 +1,53 @@
+﻿@model Exo_ASP_MVC.Models.Pokemon
+
+@{
+   ViewBag.Title = "Detail";
+}
+
+<div class="row">
+   <h2>Detail du pokemon</h2>
+
+   <div class="col-md-6">
+      @{
+         string url = $"https://assets.pokemon.com/assets/cms2/img/pokedex/full/{Model.Numero:000}.png";
+      }
+      <img src="@url" alt="Image de @Model.Nom" />
+   </div>
+   <div class="col-md-6">
+      <h3>Info</h3>
+      <p>Nom : @Model.Nom</p>
+      <p>Pokedex : @Model.Numero</p>
+      <p>@Model.Description</p>
+
+      <h3>Ajouter un commentaire</h3>
+      <form method="post" class="row">
+         <div class="col-md-12">
+            <label for="Auteur" class="col-md-3"> Pseudo : </label>
+            <input type="text" name="Auteur" id="Auteur" class="col-md-9" />
+         </div>
+
+         <div class="col-md-12">
+            <label for="Message" class="col-md-3"> Message : </label>
+            <input type="text" name="Message" id="Message" class="col-md-9" />
+         </div>
+
+         <div class="col-md-12">
+            <input type="submit" value="Envoyer" class="btn btn-success" />
+         </div>
+      </form>
+   </div>
+
+   <div class="col-md-12">
+      <h3>Commentaires</h3>
+      <ul class="list-group list-group-flush">
+         @foreach (var commentaire in Model.Commentaires)
+         {
+            <li class="list-group-item">
+               <h4>@commentaire.Auteur - @commentaire.Date.ToString("f")</h4>
+               <p>@commentaire.Message</p>
+            </li>
+         }
+
+      </ul>
+   </div>
+</div>

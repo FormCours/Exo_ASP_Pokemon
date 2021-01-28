@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Exo_ASP_MVC.Models.Pokemon>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+
+   <h1>Liste des pokemons</h1>
+
+    <div class="col-md-8">
+
+       <table class="table table-striped table-hover">
+          <thead>
+             <tr>
+                <th>N° Pokedex</th>
+                <th>Nom</th>
+                <th>Description</th>
+             </tr>
+          </thead>
+          <tbody>
+             @foreach (Exo_ASP_MVC.Models.Pokemon pokemon in Model)
+             {
+                string description = pokemon.Description.Length >= 20 ? pokemon.Description.Substring(0, 17).Trim() + "..." : pokemon.Description;
+
+                <tr>
+                    <td>@pokemon.Id</td>
+                    <td>
+                       @Html.ActionLink(@pokemon.Nom, "detail", new { id= pokemon.Id })
+                    </td>
+                    <td>@description</td>
+                </tr>
+             }
+          </tbody>
+       </table>
+
+       
+
+    </div>
+</div>
